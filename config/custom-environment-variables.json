@@ -1,0 +1,12 @@
+{
+    "db_username": "db_username",
+    "db_password": "db_password",
+    "jwt_private_key": "jwt_private_key",
+    "smtp_username": "smtp_username",
+    "smtp_password": "smtp_password",
+    "db_host": "db_host",
+    "node_envi":"node_envi",
+    "NODE_PORT": "NODE_PORT",
+    "app_url":"app_url"
+    
+}
