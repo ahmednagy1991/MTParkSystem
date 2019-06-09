@@ -2,6 +2,7 @@ const express=require('express');
 const app=express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
+const park = require('./routes/park');
 const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
@@ -36,12 +37,13 @@ else
 app.use(anony);
 app.use('/api/user', user);
 app.use('/api/auth', auth);
+app.use('/api/park', park);
 
 console.log(config.application_url);
 
   
 app.options('*', cors());
-// const port = config.get("NODE_PORT");
+const port = config.get("NODE_PORT");
 app.listen(process.env.PORT,()=>{  
     console.log(`working on port ${process.env.PORT}`);
 });

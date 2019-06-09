@@ -15,10 +15,11 @@ router.use(bodyParser.json());
 router.post('/login', (req, res) => {
     const error = auth_scehma.validate(req.body);
     if (error.error) return res.status(400).send(error.error.details[0].message);
-    user.findUserByMail(req.body.email).then((result) => {
+    user.findUserByUsername(req.body.username).then((result) => {
         helper.compare_password(req.body.password, result.password).then((valid) => {
             if (valid) {
                 helper.generateToken(_.pick(result, ["_id", "username", "email"])).then((token) => {
+                    console.log("token : "+token);
                     return res.header('x-auth-token', token).send({ "token": token, "user": _.pick(result, ["_id", "username", "email"])});
                 }).catch((err) => {
                     return res.status(500).send(err);

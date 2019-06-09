@@ -1,7 +1,8 @@
 {
-    "application_name":"SpareParts",
+    "application_name":"Park",
+    "NODE_PORT": "3000",
     "application_url": "http://localhost:3000",
-    "db":"mongodb://localhost:27017/spare_parts"
+    "db":"mongodb://localhost:27017/ParkSystem"
     
    
    

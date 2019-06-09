@@ -19,17 +19,17 @@ const User = db.model('User', db.Schema({
         required: true
     },
     phone: {
-        type: String,
-        required: true
+        type: String
+      
     },
     address: {
-        type: String,
-        required: true
+        type: String
+       
     },
     latitude: String,
     longitude: String,
     avg_rate: Number,
-    is_active: Boolean,
+    is_active: { type: Boolean, default:true},
     activation_token: String,
     created_at: { type: String, default: Date.now() }
 }));
@@ -56,14 +56,15 @@ module.exports.Register = function (newuser) {
 }
 
 
-module.exports.findUserByMail = function (mail) {
+module.exports.findUserByUsername = function (mail) {
     return new Promise(function (resolve, reject) {
-        User.findOne({ email: mail }).then((usr) => {
+        User.findOne({ username: mail }).then((usr) => {
             if (!usr) return reject("Invalid username or password");
             resolve(usr);
         });
     });
 }
+
 
 
 module.exports.findUserByActivationtoken = function (token) {
