@@ -41,12 +41,16 @@ router.get('/activate', (req, res) => {
 
 
 router.get('/all', auth, (req, res) => {
+    user.getAllUsers().then((result) => {
+             return res.send(result);
+    });
+});
    
-        user.getAllUsers().then((result) => {
-            return res.send(result);
-        }).catch((err) => {
-        return res.status(500).send(err);
-        });
+        // user.getAllUsers().then((result) => {
+        //     return res.send(result);
+        // }).catch((err) => {
+        // return res.status(500).send(err);
+        // });
         
 
 
