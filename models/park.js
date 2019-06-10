@@ -61,6 +61,8 @@ module.exports.checkout = function (park) {
             if (!obj) return reject("Park not found");
             //calculate fees
             resolve(obj);
+        }).catch((err)=>{
+            reject(err);
         });
     });
 }
