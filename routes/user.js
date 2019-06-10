@@ -41,7 +41,7 @@ router.get('/activate', (req, res) => {
 
 
 router.get('/all', auth, (req, res) => {
-    user.findUserByActivationtoken(req.query.activation_token).then((result) => {
+   
         user.getAllUsers().then((result) => {
             return res.send(result);
         })
@@ -49,7 +49,7 @@ router.get('/all', auth, (req, res) => {
         return res.status(500).send(err);
     });
 
-});
+
 
 
 
