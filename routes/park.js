@@ -33,7 +33,7 @@ router.post('/checkout', auth, (req, res) => {
     });
 });
 
-router.post('/all', auth, (req, res) => {  
+router.get('/all', auth, (req, res) => {  
     park.getAllParks().then((obj) => {
         return res.send(obj);
     }).catch((err) => {
