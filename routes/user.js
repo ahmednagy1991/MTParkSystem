@@ -44,10 +44,11 @@ router.get('/all', auth, (req, res) => {
    
         user.getAllUsers().then((result) => {
             return res.send(result);
-        })
-    }).catch((err) => {
+        }).catch((err) => {
         return res.status(500).send(err);
-    });
+        });
+        
+
 
 
 
