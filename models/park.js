@@ -29,7 +29,9 @@ module.exports.checkin = function (park) {
     new_park.time_in = moment();
     new_park.time_out="";
     new_park.mode = 1;
-    new_park.tag_id = uuidv1();   
+    new_park.tag_id = uuidv1();  
+    new_park.fees = 0;  
+
 
     return new Promise(function (resolve, reject) { 
         new_park = new_park.save((err, obj) => {           
