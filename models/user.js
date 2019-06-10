@@ -90,3 +90,13 @@ module.exports.activateUser = function (newuser) {
 }
 
 
+
+module.exports.getAllUsers = function () {
+    return new Promise(function (resolve, reject) {       
+        User.find().then((res) => {
+            resolve(res);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
