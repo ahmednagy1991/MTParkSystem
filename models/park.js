@@ -46,7 +46,7 @@ module.exports.checkin = function (park) {
 }
 
 
-function Calculate()
+function ()
 {
     return 145;
 }
@@ -56,7 +56,7 @@ module.exports.checkout = function (park) {
     return new Promise(function (resolve, reject) {
         
         Park.findOneAndUpdate({ tag_id: park.tag_id,user:park.user },{
-            mode: 2, time_out: moment(), tag_id: "", fees:145
+            mode: 2, time_out: moment(), tag_id: null, fees: Calculate()
         }).then((obj) => {          
             if (!obj) return reject("Park not found");
             //calculate fees
