@@ -60,5 +60,15 @@ module.exports.checkout = function (park) {
 }
 
 
+module.exports.getAllParks = function () {
+    return new Promise(function (resolve, reject) {
+        Park.find().then((obj) => {
+            if (!obj) return reject("No parks found");           
+            resolve(obj);
+        });
+    });
+}
+
+
 
 

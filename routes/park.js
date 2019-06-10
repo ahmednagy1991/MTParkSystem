@@ -33,6 +33,14 @@ router.post('/checkout', auth, (req, res) => {
     });
 });
 
+router.post('/all', auth, (req, res) => {  
+    park.getAllParks().then((obj) => {
+        return res.send(obj);
+    }).catch((err) => {
+        return res.status(400).send(err.errmsg);
+    });
+});
+
 
 
 module.exports = router;
