@@ -50,7 +50,7 @@ module.exports.checkout = function (park) {
     return new Promise(function (resolve, reject) {
         
         Park.findOneAndUpdate({ tag_id: park.tag_id,user:park.user },{
-            mode: 2, time_out: moment()
+            mode: 2, time_out: moment(),tag_id:""
         }).then((obj) => {          
             if (!obj) return reject("Park not found");
             //calculate fees
