@@ -9,7 +9,19 @@ const config = require('config');
 var cors = require('cors');
 
 app.options(cors());
+app.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'x-user-auth');
+    res.setHeader('Cache-Control', 'no-cache');
+
+    // Pass to next layer of middleware
+    next();
+});
 
 // app.use(cors());
 //://cloud.mongodb.com
