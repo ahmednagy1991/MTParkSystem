@@ -6,6 +6,7 @@ const park = require('./routes/park');
 //const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
+var SignalRJS = require('signalrjs');
 //var cors = require('cors');
 
 //app.options(cors());
@@ -46,6 +47,15 @@ var allowCrossDomain = function (req, res, next) {
     }
 };
 app.use(allowCrossDomain);
+
+var signalR = SignalRJS();
+
+signalR.on('CONNECTED', function () {
+    console.log('connected');
+    setInterval(function () {
+        signalR.send({ time: new Date() });
+    }, 1000)
+});
 
 if (config.get("node_envi") == "production")
 {
