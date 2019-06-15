@@ -3,25 +3,25 @@ const app=express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
-const anony = require('./middleware/anonyms');
+//const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
-var cors = require('cors');
+//var cors = require('cors');
 
-app.options(cors());
-app.use(function (req, res, next) {
+//app.options(cors());
+// app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+//     // Website you wish to allow to connect
+//     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Headers', 'x-user-auth');
-    res.setHeader('Cache-Control', 'no-cache');
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+//     res.setHeader('Access-Control-Allow-Headers', 'x-user-auth');
+//     res.setHeader('Cache-Control', 'no-cache');
 
-    // Pass to next layer of middleware
-    next();
-});
+//     // Pass to next layer of middleware
+//     next();
+// });
 
 // app.use(cors());
 //://cloud.mongodb.com
@@ -32,6 +32,20 @@ app.use(function (req, res, next) {
 //console.log(config.db);
 
 
+var allowCrossDomain = function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
+app.use(allowCrossDomain);
 
 if (config.get("node_envi") == "production")
 {
