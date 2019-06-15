@@ -84,7 +84,7 @@ const io = require('socket.io')(server);
 io.on('connection', () => { 
     console.log(`working on port ${process.env.PORT}`);
 });
-server.listen(port);
+server.listen(process.env.PORT);
 
 // app.listen(process.env.PORT,()=>{  
 //     console.log(`working on port ${process.env.PORT}`);
