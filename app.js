@@ -6,7 +6,7 @@ const park = require('./routes/park');
 //const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
-var SignalRJS = require('signalrjs');
+
 //var cors = require('cors');
 
 //app.options(cors());
@@ -48,14 +48,9 @@ var allowCrossDomain = function (req, res, next) {
 };
 app.use(allowCrossDomain);
 
-var signalR = SignalRJS();
 
-signalR.on('CONNECTED', function () {
-    console.log('connected');
-    setInterval(function () {
-        signalR.send({ time: new Date() });
-    }, 1000)
-});
+
+
 
 if (config.get("node_envi") == "production")
 {
@@ -83,6 +78,14 @@ console.log(config.application_url);
 
 
 const port = config.get("NODE_PORT");
-app.listen(process.env.PORT,()=>{  
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', () => { 
     console.log(`working on port ${process.env.PORT}`);
 });
+server.listen(port);
+
+// app.listen(process.env.PORT,()=>{  
+//     console.log(`working on port ${process.env.PORT}`);
+// });

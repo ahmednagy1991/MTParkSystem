@@ -25,6 +25,7 @@
     "mongoose": "^5.5.2",
     "nodemailer": "^6.1.1",
     "signalrjs": "^0.2.2",
+    "socket.io": "^2.2.0",
     "uuid": "^3.3.2"
   }
 }
