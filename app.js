@@ -43,6 +43,14 @@ console.log(config.application_url);
 
   
 app.options('*', cors());
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 const port = config.get("NODE_PORT");
 app.listen(process.env.PORT,()=>{  
     console.log(`working on port ${process.env.PORT}`);
