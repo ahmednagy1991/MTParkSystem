@@ -8,7 +8,7 @@ const db = require('mongoose');
 const config = require('config');
 var cors = require('cors');
 
-
+app.options(cors());
 
 
 // app.use(cors());
@@ -34,7 +34,7 @@ else
 
 
 
-app.use(anony);
+//app.use(anony);
 app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api/park', park);
@@ -42,14 +42,8 @@ app.use('/api/park', park);
 console.log(config.application_url);
 
   
-app.options('*', cors());
 
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 
 
 const port = config.get("NODE_PORT");
