@@ -81,10 +81,19 @@ const port = config.get("NODE_PORT");
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.on('connection', function (socket)  { 
-    socket.broadcast.emit('hi');
-    console.log(`working on port ${process.env.PORT}`);
+// io.on('connection', function (socket)  { 
+//     socket.broadcast.emit('hi');
+//     console.log(`working on port ${process.env.PORT}`);
+// });
+
+io.on('connection', (socket) => {
+    console.log('user connected');
+    io.emit("hi");
+    socket.on('new-message', (message) => {
+        io.emit(message);
+    });
 });
+
 server.listen(process.env.PORT);
 
 // app.listen(process.env.PORT,()=>{  
