@@ -81,7 +81,8 @@ const port = config.get("NODE_PORT");
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.on('connection', () => { 
+io.on('connection', function (socket)  { 
+    socket.broadcast.emit('hi');
     console.log(`working on port ${process.env.PORT}`);
 });
 server.listen(process.env.PORT);
