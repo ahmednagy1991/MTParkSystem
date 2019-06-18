@@ -88,8 +88,9 @@ const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     console.log('user connected');
-    io.emit("hi");
-    socket.on('new-message', (message) => {
+    
+    socket.on('updatePark', (message) => {
+        console.log("Message from Client : "+message);
         io.emit(message);
     });
 });
