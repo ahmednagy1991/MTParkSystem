@@ -95,7 +95,7 @@ io.on('connection', socket => {
     });
 });
 
-server.listen(process.env.PORT);
+http.listen(process.env.PORT);
 
 // app.listen(process.env.PORT,()=>{  
 //     console.log(`working on port ${process.env.PORT}`);
