@@ -79,4 +79,15 @@ module.exports.getAllParks = function () {
 
 
 
+module.exports.getMyParks = function (UserID) {
+    return new Promise(function (resolve, reject) {
+        Park.find({ user: UserID}).then((obj) => {
+            if (!obj) return reject("No parks found");
+            resolve(obj);
+        });
+    });
+}
+
+
+
 

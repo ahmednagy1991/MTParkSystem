@@ -23,3 +23,4 @@ exports.validateLogin = function (usr) {
     };
     return Joi.validate(usr, schema);
 }
+

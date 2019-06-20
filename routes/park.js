@@ -33,8 +33,17 @@ router.post('/checkout', auth, (req, res) => {
     });
 });
 
-router.get('/all', auth, (req, res) => {  
-    park.getAllParks().then((obj) => {
+// router.get('/all', auth, (req, res) => {  
+//     park.getAllParks().then((obj) => {
+//         return res.send(obj);
+//     }).catch((err) => {
+//         return res.status(400).send(err.errmsg);
+//     });
+// });
+
+router.get('/myParks', auth, (req, res) => {
+    park.getMyParks(req.user._id).then((obj) => {
+        console.log("Loading user parks");
         return res.send(obj);
     }).catch((err) => {
         return res.status(400).send(err.errmsg);
