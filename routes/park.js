@@ -50,6 +50,16 @@ router.get('/myParks', auth, (req, res) => {
     });
 });
 
+router.get('/myVacantParks', auth, (req, res) => {
+    park.getVacantParks(req.user._id).then((obj) => {
+        console.log("Loading user vacant parks");
+        return res.send(obj);
+    }).catch((err) => {
+        return res.status(400).send(err.errmsg);
+    });
+});
+
+
 
 
 module.exports = router;

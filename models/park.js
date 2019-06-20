@@ -89,5 +89,15 @@ module.exports.getMyParks = function (UserID) {
 }
 
 
+module.exports.getVacantParks = function (UserID) {
+    return new Promise(function (resolve, reject) {
+        Park.find({ user: UserID, time_out:null }).then((obj) => {
+            if (!obj) return reject("No parks found");
+            resolve(obj);
+        });
+    });
+}
+
+
 
 
