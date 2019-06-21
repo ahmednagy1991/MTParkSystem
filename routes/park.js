@@ -7,8 +7,7 @@ const helper = require('../utilities/utilites');
 var bodyParser = require('body-parser');
 const regTemplate = require('../email_templates/registration_template');
 const auth = require('../middleware/auth');
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
+
 // var events = require('events');
 // var eventEmitter = new events.EventEmitter();
 
@@ -63,7 +62,7 @@ router.get('/myVacantParks', auth, (req, res) => {
         var eventListeners = require('events').EventEmitter.listenerCount
             (eventEmitter, 'connection');
         console.log(eventListeners + " Listner(s) listening to connection event");
-        
+
         return res.send(obj);
     }).catch((err) => {
         return res.status(400).send(err.errmsg);
