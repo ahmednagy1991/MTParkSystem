@@ -1,5 +1,5 @@
-const express=require('express');
-const app=express();
+const express = require('express');
+const app = express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
@@ -15,7 +15,7 @@ var allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-   
+
     if ('OPTIONS' == req.method) {
         res.send(200);
     }
@@ -29,23 +29,18 @@ app.use(allowCrossDomain);
 
 
 
-if (config.get("node_envi") == "production")
-{
+if (config.get("node_envi") == "production") {
     db.connect(config.get("db_host"), { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
         .catch(err => console.log("There is an error while connecting to the databse", err));
 }
-else
-{
+else {
     db.connect(config.db, { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
         .catch(err => console.log("There is an error while connecting to the databse", err));
 }
 
 
 
-app.use(function (req, res, next) {
-    console.log("User Id"+req.user._id);
-    next();
-});
+
 
 
 
@@ -60,8 +55,10 @@ io.on('connection', socket => {
 
     console.log('user connected');
 
-    socket.on('updatePark', (message) => {
+    socket.on('updatePark', (message, userId) => {
         //let clientId = socket.id;
+        clients.push({ "client": userId, "soket": socket.id })
+        console.log(clients);
         socket.emit(message);
         io.emit("updateParkList", message);
         // console.log("Client id : " + clientId);
@@ -72,7 +69,7 @@ io.on('connection', socket => {
 });
 
 
-  
+
 
 
 
