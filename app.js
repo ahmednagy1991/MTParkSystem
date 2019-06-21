@@ -3,10 +3,11 @@ const app=express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
+const soketEmitter = require('./middleware/soketEmitter');
 const db = require('mongoose');
 const config = require('config');
 
-
+var clients = [];
 
 
 var allowCrossDomain = function (req, res, next) {
@@ -43,28 +44,12 @@ else
 app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api/park', park);
-
+app.use(soketEmitter);
 
   
 
 
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
 
-
-io.on('connection', socket => {
-    console.log('user connected');
-    
-    socket.on('updatePark', (message) => {       
-        //let clientId = socket.id;
-        socket.emit(message);
-        io.emit("updateParkList", message);
-       // console.log("Client id : " + clientId);
-        console.log("Done");
-    });
-
-    
-});
 
 http.listen(process.env.PORT);
