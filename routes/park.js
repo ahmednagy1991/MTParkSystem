@@ -65,6 +65,7 @@ router.get('/myVacantParks', auth, (req, res) => {
 
         return res.send(obj);
     }).catch((err) => {
+        console.log(err.errmsg);
         return res.status(400).send(err.errmsg);
     });
 });
