@@ -7,7 +7,10 @@ const soketEmitter = require('./middleware/soketEmitter');
 const db = require('mongoose');
 const config = require('config');
 
-var clients = [];
+
+var SimpleHashTable = require('simple-hashtable');
+var clients = new SimpleHashTable();
+
 
 
 var allowCrossDomain = function (req, res, next) {
@@ -56,8 +59,10 @@ io.on('connection', socket => {
     console.log('user connected');
 
     socket.on('updatePark', (message, userId) => {
-        //let clientId = socket.id;
-        clients.push({ "client": userId, "soket": socket.id })
+        
+        //clients.put(userId,socket.id);
+        clients.put(userId,"a");
+        clients.put(userId, "b");
         console.log(clients);
         socket.emit(message);
         io.emit("updateParkList", message);
