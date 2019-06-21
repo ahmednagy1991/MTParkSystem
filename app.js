@@ -97,10 +97,10 @@ io.on('connection', socket => {
     });
 });
 
-client.on('create', (data) => {
-    console.log("Client has been created successfully");
-    io.emit('updatePark', 'this will result in an infinite loop of "create" events!');
-});
+// client.on('create', (data) => {
+//     console.log("Client has been created successfully");
+//     io.emit('updatePark', 'this will result in an infinite loop of "create" events!');
+// });
 http.listen(process.env.PORT);
 
 
