@@ -78,8 +78,7 @@ console.log(config.application_url);
 
 const port = config.get("NODE_PORT");
 
-// const http = require('http').Server(app);
-const http = require('http').Server(process.env.PORT);
+const http = require('http').Server(app);
 const io = require('socket.io')(http);
 // io.on('connection', function (socket)  { 
 //     socket.broadcast.emit('hi');
