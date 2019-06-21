@@ -6,7 +6,7 @@ const park = require('./routes/park');
 //const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
-
+const client = require('socket.io-client')('http://localhost:' + process.env.PORT);
 //var cors = require('cors');
 
 //app.options(cors());
