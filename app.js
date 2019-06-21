@@ -8,7 +8,6 @@ const db = require('mongoose');
 const config = require('config');
 const client = require('socket.io-client')('https://parkmanagement.herokuapp.com');
 //var cors = require('cors');
-
 //app.options(cors());
 // app.use(function (req, res, next) {
 
@@ -79,7 +78,8 @@ console.log(config.application_url);
 
 const port = config.get("NODE_PORT");
 
-const http = require('http').Server(app);
+// const http = require('http').Server(app);
+const http = require('http').Server(process.env.PORT);
 const io = require('socket.io')(http);
 // io.on('connection', function (socket)  { 
 //     socket.broadcast.emit('hi');
