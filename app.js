@@ -7,8 +7,7 @@ const park = require('./routes/park');
 const db = require('mongoose');
 const config = require('config');
 
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
+
 
 //var cors = require('cors');
 //app.options(cors());
@@ -106,20 +105,6 @@ http.listen(process.env.PORT);
 
 
 
-const client_io = require('socket.io-client');
-const client_socket = client_io.connect('http://localhost:' + process.env.PORT, {
-    reconnect: true
-});
-
-client_socket.on('connect', function (socket) {
-    console.log('Connected to the server!');
-});
-
-var update_parks = function updateParks() {
-    client_socket.emit('updatePark', 'Hi from the client side!'); 
-}
-
-eventEmitter.addListener('updatePark', update_parks);
 
 // app.listen(process.env.PORT,()=>{  
 //     console.log(`working on port ${process.env.PORT}`);
