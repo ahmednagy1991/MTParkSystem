@@ -92,7 +92,9 @@ io.on('connection', socket => {
     
     socket.on('updatePark', (message) => {
         console.log("Message from Client : "+message);
-        console.log(socket.id);
+        let clientId = socket.handshake.headers['x-clientid'];
+
+        console.log("Client id : "+clientId);
         //io.emit(message);
     });
 });
