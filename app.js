@@ -95,7 +95,7 @@ io.on('connection', socket => {
         let clientId = socket.id;
 
         console.log("Client id : "+clientId);
-        io.emit(message);
+        socket.emit(message);
     });
 });
 
