@@ -60,12 +60,10 @@ io.on('connection', socket => {
 
     socket.on('updatePark', (message, userId) => {
         
-        //clients.put(userId,socket.id);
-        clients.put(userId,"a");
-        clients.put(userId, "b");
-        console.log("HashTable : "+ clients.get(userId));
+        clients.put(userId,socket.id);
+        //console.log("HashTable : "+ clients.get(userId));
         socket.emit(message);
-        io.emit("updateParkList", message);
+        io.to(clients.get(userId)).emit("updateParkList", message);
         // console.log("Client id : " + clientId);
         console.log("Done");
     });
