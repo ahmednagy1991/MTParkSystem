@@ -58,7 +58,7 @@ router.get('/myVacantParks', auth, (req, res) => {
     park.getVacantParks(req.user._id).then((obj) => {
         console.log("Vacant Parks : ");
         console.log(obj);
-        park_emitter.update_parks();
+        park_emitter.update_parks(obj);
         return res.send(obj);
     }).catch((err) => {
         console.log(err.errmsg);

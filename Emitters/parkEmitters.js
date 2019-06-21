@@ -16,6 +16,6 @@ client_socket.on('connect', function (socket) {
 
 // eventEmitter.addListener('updatePark', update_parks);
 
-module.exports.update_parks=function(){
-    client_socket.emit('updatePark', 'Hi from the client side!');
+module.exports.update_parks=function(obj){
+    client_socket.emit('updatePark', obj);
 }
