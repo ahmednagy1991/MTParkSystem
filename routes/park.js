@@ -8,6 +8,14 @@ var bodyParser = require('body-parser');
 const regTemplate = require('../email_templates/registration_template');
 const auth = require('../middleware/auth');
 
+
+
+
+var redis = require('redis');
+var publishClient = redis.createClient();
+var subscribeClient = redis.createClient();
+var events = require('global-events');
+
 // var events = require('events');
 // var eventEmitter = new events.EventEmitter();
 
@@ -59,10 +67,7 @@ router.get('/myVacantParks', auth, (req, res) => {
         console.log("Vacant Parks : ");
         console.log(obj);
         // eventEmitter.emit('updatePark');
-        var eventListeners = require('events').EventEmitter.listenerCount
-            (eventEmitter, 'connection');
-        console.log(eventListeners + " Listner(s) listening to connection event");
-
+        emitter.emit('myevent');
         return res.send(obj);
     }).catch((err) => {
         console.log(err.errmsg);

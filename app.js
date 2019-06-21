@@ -10,6 +10,25 @@ const config = require('config');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
+
+
+
+var redis = require('redis');
+var publishClient = redis.createClient();
+var subscribeClient = redis.createClient();
+var events = require('global-events');
+
+
+var emitter = new events.EventEmitter({
+    pub: publishClient,
+    sub: subscribeClient,
+    prefix: 'prefix'
+});
+
+emitter.on('myevent', function () { console.log("my eventttttttt") });
+
+
+
 //var cors = require('cors');
 //app.options(cors());
 // app.use(function (req, res, next) {
