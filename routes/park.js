@@ -59,7 +59,11 @@ router.get('/myVacantParks', auth, (req, res) => {
     park.getVacantParks(req.user._id).then((obj) => {
         console.log("Vacant Parks : ");
         console.log(obj);
-        eventEmitter.emit('updatePark');
+        // eventEmitter.emit('updatePark');
+        var eventListeners = require('events').EventEmitter.listenerCount
+            (eventEmitter, 'connection');
+        console.log(eventListeners + " Listner(s) listening to connection event");
+        
         return res.send(obj);
     }).catch((err) => {
         return res.status(400).send(err.errmsg);
