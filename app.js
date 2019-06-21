@@ -100,6 +100,18 @@ client.on('create', (data) => {
 });
 http.listen(process.env.PORT);
 
+
+const client_io = require('socket.io-client');
+const client_socket = client_io.connect('http://localhost:4444', {
+    reconnect: true
+});
+
+client_socket.on('connect', function (socket) {
+    console.log('Connected to the server!');
+});
+
+client_socket.emit('updatePark', 'Hi from the client side!'); 
+
 // app.listen(process.env.PORT,()=>{  
 //     console.log(`working on port ${process.env.PORT}`);
 // });
