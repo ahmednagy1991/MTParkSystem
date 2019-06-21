@@ -92,6 +92,7 @@ io.on('connection', socket => {
     
     socket.on('updatePark', (message) => {
         console.log("Message from Client : "+message);
+        console.log(socket);
         //io.emit(message);
     });
 });
