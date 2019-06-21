@@ -5,9 +5,9 @@
 
 module.exports = function (req, res, next) {
 
-   
 
 
+    console.log("middleware started");
     io.on('connection', socket => {
 
         console.log('user connected');
