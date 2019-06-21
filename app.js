@@ -94,12 +94,13 @@ io.on('connection', socket => {
         console.log("Message from Client : "+message);
         let clientId = socket.id;
 
-        console.log("Client id : "+clientId);
-        socket.emit(message);
        
+        socket.emit(message);
+        io.emit("updatePark2", "test");
+        console.log("Client id : " + clientId);
     });
 
-    io.emit("updatePark2","test");
+    
 });
 
 // client.on('create', (data) => {
