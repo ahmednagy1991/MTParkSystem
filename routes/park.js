@@ -7,7 +7,8 @@ const helper = require('../utilities/utilites');
 var bodyParser = require('body-parser');
 const regTemplate = require('../email_templates/registration_template');
 const auth = require('../middleware/auth');
-
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
 // var events = require('events');
 // var eventEmitter = new events.EventEmitter();
 
