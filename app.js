@@ -60,7 +60,7 @@ io.on('connection', socket => {
 
     socket.on('updatePark', (message, userId) => {
         
-        clients.put(userId,socket.id);
+        //clients.put(userId,socket.id);
         //console.log("HashTable : "+ clients.get(userId));
         socket.emit(message);
         io.emit("updateParkList", message);
