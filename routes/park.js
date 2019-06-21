@@ -20,6 +20,9 @@ router.post('/checkin', auth, (req, res) => {
     if (error.error) return res.status(400).send(error.error.details[0].message);
     req.body.user=req.user._id;
     park.checkin(req.body).then((obj)=>{
+        park.getVacantParks(req.user._id).then((resul_object)=>{
+            park_emitter.update_parks(resul_object, req.user._id);
+        });       
         return res.send(_.pick(obj, ["tag_id"]));
     }).catch((err)=>{
         return res.status(400).send(err.errmsg); 
@@ -58,7 +61,7 @@ router.get('/myVacantParks', auth, (req, res) => {
     park.getVacantParks(req.user._id).then((obj) => {
         console.log("Vacant Parks : ");
         console.log(obj);
-        park_emitter.update_parks(obj, req.user._id);
+       
         return res.send(obj);
     }).catch((err) => {
         console.log(err.errmsg);
