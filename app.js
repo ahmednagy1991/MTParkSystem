@@ -40,14 +40,31 @@ else
         .catch(err => console.log("There is an error while connecting to the databse", err));
 }
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+
 
 
 app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api/park', park);
-app.use(soketEmitter);
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+io.on('connection', socket => {
+
+    console.log('user connected'+Request.user._id);
+
+    socket.on('updatePark', (message) => {
+        //let clientId = socket.id;
+        socket.emit(message);
+        io.emit("updateParkList", message);
+        // console.log("Client id : " + clientId);
+        console.log("Done");
+    });
+
+
+});
+
 
   
 
