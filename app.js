@@ -54,12 +54,12 @@ app.use('/api/park', park);
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+
+
 io.on('connection', socket => {
 
     console.log('user connected');
-    socket.on('updateParkList',(message)=>{
-        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-    })
+   
 
     socket.on('updatePark', (message, userId) => {
         
@@ -70,7 +70,7 @@ io.on('connection', socket => {
         //
         //console.log("HashTable : "+ clients.get(userId));
         //socket.emit(message);
-        //io.to(clients.get(userId)).emit("updateParkList", message);
+        io.emit("updateParkList", message);
         //.to(clients.get(userId)) 
         // console.log("Client id : " + clientId);
         console.log("Done");
@@ -81,7 +81,10 @@ io.on('connection', socket => {
 
 
 
+io.on('test', socket => {
 
+console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzz");
+});
 
 
 
