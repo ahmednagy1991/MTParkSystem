@@ -8,6 +8,10 @@ var bodyParser = require('body-parser');
 const regTemplate = require('../email_templates/registration_template');
 const auth = require('../middleware/auth');
 
+// var events = require('events');
+// var eventEmitter = new events.EventEmitter();
+
+
 router.use(bodyParser.json());
 
 
@@ -54,6 +58,7 @@ router.get('/myVacantParks', auth, (req, res) => {
     park.getVacantParks(req.user._id).then((obj) => {
         console.log("Vacant Parks : ");
         console.log(obj);
+        eventEmitter.emit('updatePark');
         return res.send(obj);
     }).catch((err) => {
         return res.status(400).send(err.errmsg);

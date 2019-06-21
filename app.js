@@ -3,11 +3,13 @@ const app=express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
-const event_emitter = require('./middleware/EvenetEmitters');
 //const anony = require('./middleware/anonyms');
 const db = require('mongoose');
 const config = require('config');
-const client = require('socket.io-client')('https://parkmanagement.herokuapp.com');
+
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
 //var cors = require('cors');
 //app.options(cors());
 // app.use(function (req, res, next) {
@@ -100,9 +102,24 @@ client.on('create', (data) => {
     io.emit('updatePark', 'this will result in an infinite loop of "create" events!');
 });
 http.listen(process.env.PORT);
-app.use('/api/park', event_emitter);
 
 
+
+
+const client_io = require('socket.io-client');
+const client_socket = client_io.connect('http://localhost:' + process.env.PORT, {
+    reconnect: true
+});
+
+client_socket.on('connect', function (socket) {
+    console.log('Connected to the server!');
+});
+
+var update_parks = function updateParks() {
+    client_socket.emit('updatePark', 'Hi from the client side!'); 
+}
+
+eventEmitter.addListener('updatePark', update_parks);
 
 // app.listen(process.env.PORT,()=>{  
 //     console.log(`working on port ${process.env.PORT}`);
