@@ -71,14 +71,14 @@ app.use('/api/user', user);
 app.use('/api/auth', auth);
 app.use('/api/park', park);
 
-console.log(config.application_url);
+// console.log(config.application_url);
 
   
 
 
 
 
-const port = config.get("NODE_PORT");
+// const port = config.get("NODE_PORT");
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -92,7 +92,7 @@ io.on('connection', socket => {
     
     socket.on('updatePark', (message) => {
         console.log("Message from Client : "+message);
-        io.emit(message);
+        //io.emit(message);
     });
 });
 
