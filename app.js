@@ -40,6 +40,9 @@ else
         .catch(err => console.log("There is an error while connecting to the databse", err));
 }
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 
 app.use('/api/user', user);
 app.use('/api/auth', auth);
