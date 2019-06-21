@@ -42,6 +42,12 @@ else
 
 
 
+app.use(function (req, res, next) {
+    console.log("User Id"+req.user._id);
+    next();
+});
+
+
 
 app.use('/api/user', user);
 app.use('/api/auth', auth);
@@ -52,7 +58,7 @@ const io = require('socket.io')(http);
 
 io.on('connection', socket => {
 
-    console.log('user connected'+req.user._id);
+    console.log('user connected');
 
     socket.on('updatePark', (message) => {
         //let clientId = socket.id;
