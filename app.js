@@ -102,7 +102,7 @@ http.listen(process.env.PORT);
 
 
 const client_io = require('socket.io-client');
-const client_socket = client_io.connect('http://localhost:4444', {
+const client_socket = client_io.connect('http://localhost:' + process.env.PORT, {
     reconnect: true
 });
 
