@@ -70,6 +70,9 @@ io.on('connection', socket => {
         //
         //console.log("HashTable : "+ clients.get(userId));
         //socket.emit(message);
+        io.on("test",(msg)=>{
+            console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        });
         io.emit("updateParkList", message);
         //.to(clients.get(userId)) 
         // console.log("Client id : " + clientId);
@@ -80,11 +83,6 @@ io.on('connection', socket => {
 });
 
 
-
-io.on('test', socket => {
-
-console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzz");
-});
 
 
 
