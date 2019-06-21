@@ -63,7 +63,8 @@ io.on('connection', socket => {
         clients.put(userId,socket.id);
         //console.log("HashTable : "+ clients.get(userId));
         socket.emit(message);
-        io.to(clients.get(userId)).emit("updateParkList", message);
+        io.emit("updateParkList", message);
+        //.to(clients.get(userId))
         // console.log("Client id : " + clientId);
         console.log("Done");
     });
