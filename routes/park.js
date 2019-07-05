@@ -21,7 +21,7 @@ router.post('/checkin', auth, (req, res) => {
     req.body.user=req.user._id;
     park.checkin(req.body).then((obj)=>{
         park.getVacantParks(req.user._id).then((resul_object)=>{
-            park_emitter.update_parks(resul_object, req.user._id);
+         
         });       
         return res.send(_.pick(obj, ["tag_id"]));
     }).catch((err)=>{
@@ -33,11 +33,8 @@ router.post('/checkout', auth, (req, res) => {
     const error = park_schema.validateCheckOut(req.body);
     if (error.error) return res.status(400).send(error.error.details[0].message);
     req.body.user=req.user._id;
-    park.checkout(req.body).then((obj) => {
-        return res.send("done");
-    }).catch((err) => {
-        return res.status(400).send(err.errmsg);
-    });
+    park_emitter.update_parks(req.user._id);
+    return res.send("done");  
 });
 
 // router.get('/all', auth, (req, res) => {  

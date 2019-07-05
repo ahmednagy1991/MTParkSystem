@@ -3,13 +3,13 @@ const app = express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
-const soketEmitter = require('./middleware/soketEmitter');
+// //const soketEmitter = require('./middleware/soketEmitter');
+// const SoketClients = require('./middleware/ClientSokets');
 const db = require('mongoose');
 const config = require('config');
 
 
-var SimpleHashTable = require('simple-hashtable');
-var clients = new SimpleHashTable();
+
 
 
 
@@ -20,7 +20,7 @@ var allowCrossDomain = function (req, res, next) {
 
 
     if ('OPTIONS' == req.method) {
-        res.send(200);
+        res.sendStatus(200);
     }
     else {
         next();
@@ -32,18 +32,25 @@ app.use(allowCrossDomain);
 
 
 
-if (config.get("node_envi") == "production") {
-    db.connect(config.get("db_host"), { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
-        .catch(err => console.log("There is an error while connecting to the databse", err));
-}
-else {
-    db.connect(config.db, { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
-        .catch(err => console.log("There is an error while connecting to the databse", err));
-}
+
+// if (config.get("node_envi") == "production") {
+//     db.connect(config.get("db_host"), { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+//         .catch(err => console.log("There is an error while connecting to the databse", err));
+// }
+// else {
+//     db.connect(config.db, { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+//         .catch(err => console.log("There is an error while connecting to the databse", err));
+// }
+
+
+//from env
+db.connect("mongodb+srv://ahmednagy:Ahmed1991@cluster0-5p48n.mongodb.net/test", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+    .catch(err => console.log("There is an error while connecting to the databse", err));
 
 
 
 
+//
 
 
 
@@ -53,35 +60,17 @@ app.use('/api/park', park);
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
-
-
-io.on('connection', socket => {
-
-    console.log('user connected');
-   
-
-    socket.on('updatePark', (message, userId) => {
-        
-        if (userId)
-        {
-            clients.put(userId, socket.id);
-        }
-        
-        //console.log("HashTable : "+ clients.get(userId));
-        //socket.emit(message);      
-        io.emit("updateParkList", message);
-        //.to(clients.get(userId)) 
-        // console.log("Client id : " + clientId);
-        console.log("Done");
-    });
-
-
-});
+var sokets=require("./soket_events/ParkSoketEvents")(io);
 
 
 
 
 
 
-http.listen(process.env.PORT);
+
+//from env
+// http.listen(process.env.PORT);
+// console.log("working on http://localhost:" + process.env.PORT);
+
+http.listen(3000);
+console.log("working on http://localhost:" + 3000);

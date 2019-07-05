@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zxing/ngx-scanner": "^1.7.1",
+    "angular-hashtable": "0.0.9",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "config": "^3.1.0",
@@ -24,6 +26,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "mongoose": "^5.5.2",
+    "node-hashtable": "^0.1.1",
     "nodemailer": "^6.1.1",
     "signalrjs": "^0.2.2",
     "simple-hashtable": "^1.0.0",

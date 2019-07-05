@@ -31,6 +31,7 @@ module.exports.checkin = function (park) {
     new_park.mode = 1;
     new_park.tag_id = uuidv1();  
     new_park.fees = 0;  
+    new_park.status="In"
 
 
     return new Promise(function (resolve, reject) { 
@@ -70,7 +71,7 @@ module.exports.checkout = function (park) {
 
 module.exports.getAllParks = function () {
     return new Promise(function (resolve, reject) {
-        Park.find().then((obj) => {
+        Park.find().sort([['_id', -1]]).then((obj) => {
             if (!obj) return reject("No parks found");           
             resolve(obj);
         });
@@ -97,6 +98,24 @@ module.exports.getVacantParks = function (UserID) {
         });
     });
 }
+
+
+
+
+module.exports.SetPickupRequest = function (park) {
+    return new Promise(function (resolve, reject) {
+
+        Park.findOneAndUpdate({ tag_id: park.tag_id, user: park.user }, {
+        status:"Pickup Request"
+        }).then((obj) => {
+            if (!obj) return reject("Park not found");           
+            resolve(obj);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 
 
 
