@@ -3,13 +3,16 @@ const app = express();
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const park = require('./routes/park');
+
+
+const roles = require('./models/roles');
 // //const soketEmitter = require('./middleware/soketEmitter');
 // const SoketClients = require('./middleware/ClientSokets');
 const db = require('mongoose');
 const config = require('config');
 
 
-
+roles.seed_roles();
 
 
 
@@ -44,7 +47,10 @@ app.use(allowCrossDomain);
 
 
 //from env
-db.connect("mongodb+srv://ahmednagy:Ahmed1991@cluster0-5p48n.mongodb.net/test", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+// db.connect("mongodb+srv://ahmednagy:Ahmed1991@cluster0-5p48n.mongodb.net/test", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+//     .catch(err => console.log("There is an error while connecting to the databse", err));
+
+db.connect("mongodb://localhost:27017/MyParkApp", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
     .catch(err => console.log("There is an error while connecting to the databse", err));
 
 

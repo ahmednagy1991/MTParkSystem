@@ -52,6 +52,20 @@ exports = module.exports = function (io) {
               
             });
         });
+
+
+        socket.on('SetOut', (body) => {
+            body.user = usr._id;
+            park.SetOut(body).then((resul_object) => {
+                console.log("set to time out");
+                park.getVacantParks(usr._id).then((resul_object) => {
+                    park.getVacantParks(usr._id).then((resul_object) => {
+                        socket.emit("updateParkList", resul_object);
+                    });
+                });
+
+            });
+        });
         
 
     });

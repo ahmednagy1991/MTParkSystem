@@ -14,6 +14,7 @@ const Park = db.model('Park', db.Schema({
     car_id:String,
     time_in: Date,
     time_out: Date,
+    is_free: Boolean,
     status:String,
     fees:Number,
     mode: { type: Number, required: true},
@@ -57,7 +58,7 @@ module.exports.checkout = function (park) {
     return new Promise(function (resolve, reject) {
         
         Park.findOneAndUpdate({ tag_id: park.tag_id,user:park.user },{
-            mode: 2, time_out: moment(), tag_id: null, fees: Calculate()
+            mode: 2, time_out: moment(), tag_id: null, fees: Calculate(), status: "Out",
         }).then((obj) => {          
             if (!obj) return reject("Park not found");
             //calculate fees
@@ -92,7 +93,7 @@ module.exports.getMyParks = function (UserID) {
 
 module.exports.getVacantParks = function (UserID) {
     return new Promise(function (resolve, reject) {
-        Park.find({ user: UserID, mode:1 }).then((obj) => {
+        Park.find({ user: UserID, mode: 1 }).sort([['time_in', -1]]).then((obj) => {
             if (!obj) return reject("No parks found");
             resolve(obj);
         });
@@ -117,6 +118,21 @@ module.exports.SetPickupRequest = function (park) {
 }
 
 
+
+module.exports.SetOut = function (park) {
+    return new Promise(function (resolve, reject) {
+
+        Park.findOneAndUpdate({ tag_id: park.tag_id, user: park.user }, {
+            status: "Out",
+            mode: 2, time_out: moment(), tag_id: null, fees: Calculate()
+        }).then((obj) => {
+            if (!obj) return reject("Park not found");
+            resolve(obj);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
 
 
 

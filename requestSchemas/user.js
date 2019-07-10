@@ -5,7 +5,10 @@ exports.validate = function (usr) {
     const schema = {
         username: Joi.string().required().min(5),
         password: Joi.string().required().min(5),
-        email: Joi.string().required().email()
+        email: Joi.string().required().email(),
+        fees: Joi.number().required(),
+        free_member: Joi.boolean().required(),
+        
         // phone: Joi.string().required(),
         // address: Joi.string().required().min(5),
         // latitude: Joi.string(),

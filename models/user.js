@@ -23,15 +23,26 @@ const User = db.model('User', db.Schema({
       
     },
     address: {
-        type: String
-       
+        type: String       
     },
     latitude: String,
     longitude: String,
-    avg_rate: Number,
+    is_super_admin: Boolean,
+    fees: { type: Number, required: true} ,
+    free_member: {
+        type: Boolean, required: true
+    },
     is_active: { type: Boolean, default:true},
     activation_token: String,
-    created_at: { type: String, default: Date.now() }
+    created_at: { type: String, default: Date.now() },
+    role: {
+        type: db.Schema.Types.ObjectId,
+        ref: 'Role'
+    },
+    parent_user: {
+        type: db.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }));
 
 
@@ -67,6 +78,15 @@ module.exports.findUserByUsername = function (mail) {
 
 
 
+module.exports.findUserById = function (id) {
+    return new Promise(function (resolve, reject) {
+        User.findOne({ _id: id }).then((usr) => {
+            if (!usr) return reject("Invalid username or password");
+            resolve(usr);
+        });
+    });
+}
+
 module.exports.findUserByActivationtoken = function (token) {
     return new Promise(function (resolve, reject) {
         User.findOne({ activation_token: token }).then((usr) => {
@@ -97,6 +117,18 @@ module.exports.getAllUsers = function () {
             resolve(res);
         }).catch((err) => {
             reject(err);
+        });
+    });
+}
+
+
+
+
+module.exports.updateUser = function (body) {
+    return new Promise(function (resolve, reject) {
+        User.findByIdAndUpdate({ _id: body._id },body).then((usr) => {
+            if (!usr) return reject("Invalid username or password");
+            resolve(usr);
         });
     });
 }
