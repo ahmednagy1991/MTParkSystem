@@ -75,8 +75,8 @@ var sokets=require("./soket_events/ParkSoketEvents")(io);
 
 
 //from env
-// http.listen(process.env.PORT);
+ http.listen(process.env.PORT);
 // console.log("working on http://localhost:" + process.env.PORT);
 
-http.listen(3000);
-console.log("working on http://localhost:" + 3000);
+// http.listen(3000);
+// console.log("working on http://localhost:" + 3000);
