@@ -30,7 +30,17 @@ exports = module.exports = function (io) {
             });
         });
 
-
+        socket.on('checkout_park', (body) => {
+            const error = park_schema.validateCheckOut(body);
+            if (error.error) return res.status(400).send(error.error.details[0].message);
+            body.user = usr._id;
+            park.checkout(body).then((obj) => {
+                park.getVacantParks(usr._id).then((resul_object) => {
+                    socket.emit("updateParkList", resul_object);
+                });
+            }).catch((err) => {
+            });
+        });
 
 
         socket.on('checkout', (user_id) => {
