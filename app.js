@@ -36,22 +36,22 @@ app.use(allowCrossDomain);
 
 
 
-// if (config.get("node_envi") == "production") {
-//     db.connect(config.get("db_host"), { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
-//         .catch(err => console.log("There is an error while connecting to the databse", err));
-// }
-// else {
-//     db.connect(config.db, { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
-//         .catch(err => console.log("There is an error while connecting to the databse", err));
-// }
+if (config.get("node_envi") == "production") {
+    db.connect(config.get("db_host"), { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+        .catch(err => console.log("There is an error while connecting to the databse", err));
+}
+else {
+    db.connect(config.db, { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+        .catch(err => console.log("There is an error while connecting to the databse", err));
+}
 
 
 //from env
 // db.connect("mongodb+srv://ahmednagy:Ahmed1991@cluster0-5p48n.mongodb.net/test", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
 //     .catch(err => console.log("There is an error while connecting to the databse", err));
 
-db.connect("mongodb://localhost:27017/MyParkApp", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
-    .catch(err => console.log("There is an error while connecting to the databse", err));
+// db.connect("mongodb://localhost:27017/ParkSystem", { useNewUrlParser: true, useCreateIndex: true }).then(() => console.log("connected to databse successfuly"))
+//     .catch(err => console.log("There is an error while connecting to the databse", err));
 
 
 
